@@ -43,7 +43,7 @@ jobs:
         env:
           CLOUDSMITH_API_KEY: ${{ secrets.CLOUDSMITH_API_KEY }}
         run: |
-          cloudsmith push deb onismond/calc target/debian/*.deb
+          cloudsmith push deb onismond/calc/ubuntu/jammy target/debian/*.deb
         continue-on-error: true
 
       - name: Upload .rpm to Cloudsmith
@@ -51,7 +51,7 @@ jobs:
         env:
           CLOUDSMITH_API_KEY: ${{ secrets.CLOUDSMITH_API_KEY }}
         run: |
-          cloudsmith push rpm onismond/calc target/generate-rpm/*.rpm
+          cloudsmith push rpm onismond/calc/el/8 target/generate-rpm/*.rpm
         continue-on-error: true
 
       # ---------------- Windows builds ----------------
