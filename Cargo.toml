@@ -20,7 +20,7 @@ group = "Applications/Utilities"
 requires = ["glibc"]
 vendor = "Onismond"
 url = "https://github.com/onismond/calc"
-assets = [
-    ["target/release/calc", "/usr/bin/calc", "755"],
-    ["README.md", "/usr/share/doc/calc/README.md", "644"],
+targets = [
+    { path = "target/release/calc", dest = "/usr/bin/calc", mode = "755" },
+    { path = "README.md", dest = "/usr/share/doc/calc/README.md", mode = "644" }
 ]
