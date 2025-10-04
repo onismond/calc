@@ -47,15 +47,15 @@ sudo dnf install calc-0.1.0
 
 Download the latest prebuilt binary from Cloudsmith:
 
-```
+
 [https://dl.cloudsmith.io/public/onismond/calc/raw/versions/latest/calc.exe](https://dl.cloudsmith.io/public/onismond/calc/raw/versions/latest/calc.exe)
-```
+
 
 For a specific version (e.g., `0.1.0`):
 
-```
+
 [https://dl.cloudsmith.io/public/onismond/calc/raw/versions/0.1.0/calc.exe](https://dl.cloudsmith.io/public/onismond/calc/raw/versions/0.1.0/calc.exe)
-```
+
 
 Then, run it directly from the terminal:
 
@@ -71,15 +71,15 @@ Then, run it directly from the terminal:
 
 Download the latest macOS binary from Cloudsmith:
 
-```
+
 [https://dl.cloudsmith.io/public/onismond/calc/raw/versions/latest/calc](https://dl.cloudsmith.io/public/onismond/calc/raw/versions/latest/calc)
-```
+
 
 For a specific version (e.g., `0.1.0`):
 
-```
+
 [https://dl.cloudsmith.io/public/onismond/calc/raw/versions/0.1.0/calc](https://dl.cloudsmith.io/public/onismond/calc/raw/versions/0.1.0/calc)
-```
+
 
 Make it executable and move it to your PATH:
 
