@@ -19,21 +19,31 @@ jobs:
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
 
-      - name: Install Cloudsmith CLI
-        run: pip install --upgrade cloudsmith-cli
-
       # ---------------- Linux builds ----------------
-      - name: Install packaging tools
+      - name: Install packaging tools (fast)
         if: matrix.os == 'ubuntu-latest'
+        timeout-minutes: 5
         run: |
-          cargo install cargo-deb
-          cargo install cargo-rpm
+          sudo apt-get update
+          sudo apt-get install -y python3-pip curl
+          
+          # Install cargo-deb (from apt or GitHub)
+          sudo apt-get install -y cargo-deb || {
+            curl -L https://github.com/mmstick/cargo-deb/releases/latest/download/cargo-deb-x86_64-unknown-linux-musl.tar.gz \
+              | sudo tar xz -C /usr/local/bin
+          }
 
-      - name: Build .deb
+          # Install cargo-rpm (from GitHub binary)
+          curl -L https://github.com/iqlusioninc/cargo-rpm/releases/latest/download/cargo-rpm-x86_64-unknown-linux-musl.tar.gz \
+            | sudo tar xz -C /usr/local/bin
+
+          pip install --upgrade cloudsmith-cli
+
+      - name: Build .deb package
         if: matrix.os == 'ubuntu-latest'
         run: cargo deb
 
-      - name: Build .rpm
+      - name: Build .rpm package
         if: matrix.os == 'ubuntu-latest'
         run: cargo rpm build
 
@@ -42,35 +52,66 @@ jobs:
         env:
           CLOUDSMITH_API_KEY: ${{ secrets.CLOUDSMITH_API_KEY }}
         run: |
-          cloudsmith push deb onismond/calc/debian/any-version target/debian/*.deb
+          cloudsmith push deb onismond/calc/debian/any-distro target/debian/*.deb --version ${{ github.ref_name }}
 
       - name: Upload .rpm to Cloudsmith
         if: matrix.os == 'ubuntu-latest'
         env:
           CLOUDSMITH_API_KEY: ${{ secrets.CLOUDSMITH_API_KEY }}
         run: |
-          cloudsmith push rpm onismond/calc/el/any-version target/release/rpmbuild/RPMS/x86_64/*.rpm
+          cloudsmith push rpm onismond/calc/el/any-distro target/release/rpmbuild/RPMS/x86_64/*.rpm --version ${{ github.ref_name }}
 
       # ---------------- Windows builds ----------------
+      - name: Cache pip packages
+        if: matrix.os == 'windows-latest'
+        uses: actions/cache@v4
+        with:
+          path: C:\Users\runneradmin\AppData\Local\pip\Cache
+          key: ${{ runner.os }}-pip-cache
+
+      - name: Cache Rust build
+        if: matrix.os == 'windows-latest'
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: ${{ runner.os }}-cargo-
+
+      - name: Install Cloudsmith CLI
+        if: matrix.os == 'windows-latest'
+        timeout-minutes: 10
+        run: |
+          python -m pip install --upgrade pip
+          pip install --upgrade cloudsmith-cli
+
       - name: Build (Windows)
         if: matrix.os == 'windows-latest'
+        timeout-minutes: 10
         run: cargo build --release
 
       - name: Upload Windows exe to Cloudsmith
         if: matrix.os == 'windows-latest'
+        timeout-minutes: 10
         env:
           CLOUDSMITH_API_KEY: ${{ secrets.CLOUDSMITH_API_KEY }}
         run: |
-          cloudsmith push raw onismond/calc/windows/any-version target/release/calc.exe
+          cloudsmith push raw onismond/calc target/release/calc.exe --version ${{ github.ref_name }}
 
       # ---------------- macOS builds ----------------
       - name: Build (macOS)
         if: matrix.os == 'macos-latest'
         run: cargo build --release
 
+      - name: Install Cloudsmith CLI (macOS)
+        if: matrix.os == 'macos-latest'
+        run: pip install --upgrade cloudsmith-cli
+
       - name: Upload macOS binary to Cloudsmith
         if: matrix.os == 'macos-latest'
         env:
           CLOUDSMITH_API_KEY: ${{ secrets.CLOUDSMITH_API_KEY }}
         run: |
-          cloudsmith push raw onismond/calc/macos/any-version target/release/calc
+          cloudsmith push raw onismond/calc target/release/calc --version ${{ github.ref_name }}
