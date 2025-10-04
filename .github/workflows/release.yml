@@ -26,27 +26,8 @@ jobs:
       - name: Install packaging tools (from binaries)
         if: matrix.os == 'ubuntu-latest'
         run: |
-          set -eux
-
-          # Install required dependencies
-          sudo apt-get update
-          sudo apt-get install -y curl xz-utils python3-pip rpm
-
-          # Install cargo-deb binary directly from GitHub
-          CARGO_DEB_VERSION="3.6.0"
-          curl -L "https://github.com/mmstick/cargo-deb/releases/download/v${CARGO_DEB_VERSION}/cargo-deb-v${CARGO_DEB_VERSION}-x86_64-unknown-linux-gnu.tar.gz" \
-            -o cargo-deb.tar.gz
-          tar -xzf cargo-deb.tar.gz
-          sudo mv cargo-deb /usr/local/bin/
-
-          # Install cargo-rpm binary directly
-          CARGO_RPM_VERSION="0.7.2"
-          curl -L "https://github.com/iqlusioninc/cargo-rpm/releases/download/v${CARGO_RPM_VERSION}/cargo-rpm-v${CARGO_RPM_VERSION}-x86_64-unknown-linux-gnu.tar.gz" \
-            -o cargo-rpm.tar.gz
-          tar -xzf cargo-rpm.tar.gz
-          sudo mv cargo-rpm /usr/local/bin/
-
-          # Install Cloudsmith CLI
+          cargo install cargo-deb
+          cargo install cargo-rpm
           pip install --upgrade cloudsmith-cli
 
       - name: Build .deb package
