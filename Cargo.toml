@@ -19,7 +19,7 @@ vendor = "Onismond"
 url = "https://github.com/onismond/calc"
 
 [package.metadata.rpm.targets]
-calc = { path = "target/release/calc", dest = "/usr/bin/calc", mode = "755" }
+calc = { path = "calc", dest = "/usr/bin/calc", mode = "755" }
 readme = { path = "README.md", dest = "/usr/share/doc/calc/README.md", mode = "644" }
 
 [dependencies]

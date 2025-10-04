@@ -43,14 +43,14 @@ jobs:
         env:
           CLOUDSMITH_API_KEY: ${{ secrets.CLOUDSMITH_API_KEY }}
         run: |
-          cloudsmith push deb onismond/calc/debian/any-distro target/debian/*.deb --version ${{ github.ref_name }}
+          cloudsmith push deb onismond/calc target/debian/*.deb --version ${{ github.ref_name }}
 
       - name: Upload .rpm to Cloudsmith
         if: matrix.os == 'ubuntu-latest'
         env:
           CLOUDSMITH_API_KEY: ${{ secrets.CLOUDSMITH_API_KEY }}
         run: |
-          cloudsmith push rpm onismond/calc/el/any-distro target/release/rpmbuild/RPMS/x86_64/*.rpm --version ${{ github.ref_name }}
+          cloudsmith push rpm onismond/calc target/release/rpmbuild/RPMS/x86_64/*.rpm --version ${{ github.ref_name }}
         continue-on-error: true
 
       # ---------------- Windows builds ----------------
