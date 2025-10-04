@@ -27,9 +27,7 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         run: |
           cargo install cargo-deb
-          wget https://github.com/cat-in-136/cargo-generate-rpm/releases/latest/download/cargo-generate-rpm-x86_64-unknown-linux-musl.tar.gz
-          tar -xzf cargo-generate-rpm-x86_64-unknown-linux-musl.tar.gz
-          sudo mv cargo-generate-rpm /usr/local/bin/
+          cargo install cargo-generate-rpm
           pip install --upgrade cloudsmith-cli
 
       - name: Build .deb package
@@ -37,6 +35,7 @@ jobs:
         run: cargo deb
 
       - name: Generate RPM package
+        if: matrix.os == 'ubuntu-latest'
         run: cargo generate-rpm
 
       - name: Upload .deb to Cloudsmith
