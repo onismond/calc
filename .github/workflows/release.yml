@@ -27,16 +27,17 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         run: |
           cargo install cargo-deb
-          cargo install cargo-rpm
+          wget https://github.com/cat-in-136/cargo-generate-rpm/releases/latest/download/cargo-generate-rpm-x86_64-unknown-linux-musl.tar.gz
+          tar -xzf cargo-generate-rpm-x86_64-unknown-linux-musl.tar.gz
+          sudo mv cargo-generate-rpm /usr/local/bin/
           pip install --upgrade cloudsmith-cli
 
       - name: Build .deb package
         if: matrix.os == 'ubuntu-latest'
         run: cargo deb
 
-      - name: Build .rpm package
-        if: matrix.os == 'ubuntu-latest'
-        run: cargo rpm build
+      - name: Generate RPM package
+        run: cargo generate-rpm
 
       - name: Upload .deb to Cloudsmith
         if: matrix.os == 'ubuntu-latest'
@@ -44,13 +45,14 @@ jobs:
           CLOUDSMITH_API_KEY: ${{ secrets.CLOUDSMITH_API_KEY }}
         run: |
           cloudsmith push deb onismond/calc target/debian/*.deb --version ${{ github.ref_name }}
+        continue-on-error: true
 
       - name: Upload .rpm to Cloudsmith
         if: matrix.os == 'ubuntu-latest'
         env:
           CLOUDSMITH_API_KEY: ${{ secrets.CLOUDSMITH_API_KEY }}
         run: |
-          cloudsmith push rpm onismond/calc target/release/rpmbuild/RPMS/x86_64/*.rpm --version ${{ github.ref_name }}
+          cloudsmith push raw onismond/calc target/generate-rpm/*.rpm --version ${{ github.ref_name }}
         continue-on-error: true
 
       # ---------------- Windows builds ----------------
