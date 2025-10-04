@@ -10,9 +10,6 @@ homepage = "https://github.com/onismond/calc"
 repository = "https://github.com/onismond/calc"
 readme = "README.md"
 
-[dependencies]
-clap = { version = "4.5.48", features = ["derive"] }
-
 [package.metadata.rpm]
 summary = "A CLI calculator program"
 license = "MIT"
@@ -20,7 +17,11 @@ group = "Applications/Utilities"
 requires = ["glibc"]
 vendor = "Onismond"
 url = "https://github.com/onismond/calc"
-targets = [
-    { path = "target/release/calc", dest = "/usr/bin/calc", mode = "755" },
-    { path = "README.md", dest = "/usr/share/doc/calc/README.md", mode = "644" }
-]
+
+[package.metadata.rpm.targets]
+calc = { path = "target/release/calc", dest = "/usr/bin/calc", mode = "755" }
+readme = { path = "README.md", dest = "/usr/share/doc/calc/README.md", mode = "644" }
+
+[dependencies]
+clap = { version = "4.5.48", features = ["derive"] }
+
