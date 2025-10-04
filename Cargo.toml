@@ -5,10 +5,22 @@ edition = "2024"
 authors = ["Onismond Yao Duame onismondyao@gmail.com"]
 license = "MIT"
 
-description = "A simple CLI calculator supporting sum, sub, mul, div"
+description = "A CLI calculator program"
 homepage = "https://github.com/onismond/calc"
 repository = "https://github.com/onismond/calc"
 readme = "README.md"
 
 [dependencies]
 clap = { version = "4.5.48", features = ["derive"] }
+
+[package.metadata.rpm]
+summary = "A CLI calculator program"
+license = "MIT"
+group = "Applications/Utilities"
+requires = ["glibc"]
+vendor = "Onismond"
+url = "https://github.com/onismond/calc"
+assets = [
+    ["target/release/calc", "/usr/bin/calc", "755"],
+    ["README.md", "/usr/share/doc/calc/README.md", "644"],
+]
