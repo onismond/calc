@@ -10,14 +10,14 @@ A simple, fast, and lightweight CLI calculator built with Rust.
 You can install the latest `.deb` package directly from Cloudsmith:
 
 ```bash
-curl -1sLf 'https://dl.cloudsmith.io/public/onismond/calc/setup.deb.sh' | sudo -E bash
+curl -1sLf 'https://dl.cloudsmith.io/uTC0JHPikZmMO75J/onismond/calc/setup.deb.sh' | sudo -E bash
 sudo apt install calc
 ```
 
 To install a specific version (e.g., `0.1.0`):
 
 ```bash
-curl -1sLf 'https://dl.cloudsmith.io/public/onismond/calc/setup.deb.sh' | sudo -E bash
+curl -1sLf 'https://dl.cloudsmith.io/uTC0JHPikZmMO75J/onismond/calc/setup.deb.sh' | sudo -E bash
 sudo apt install calc=0.1.0
 ```
 
@@ -28,14 +28,14 @@ sudo apt install calc=0.1.0
 For `.rpm`-based systems:
 
 ```bash
-curl -1sLf 'https://dl.cloudsmith.io/public/onismond/calc/setup.rpm.sh' | sudo -E bash
+curl -1sLf 'https://dl.cloudsmith.io/uTC0JHPikZmMO75J/onismond/calc/setup.rpm.sh' | sudo -E bash
 sudo dnf install calc
 ```
 
 To install a specific version (e.g., `0.1.0`):
 
 ```bash
-curl -1sLf 'https://dl.cloudsmith.io/public/onismond/calc/setup.rpm.sh' | sudo -E bash
+curl -1sLf 'https://dl.cloudsmith.io/uTC0JHPikZmMO75J/onismond/calc/setup.rpm.sh' | sudo -E bash
 sudo dnf install calc-0.1.0
 ```
 
@@ -48,13 +48,13 @@ sudo dnf install calc-0.1.0
 Download the latest prebuilt binary from Cloudsmith:
 
 
-[https://dl.cloudsmith.io/public/onismond/calc/raw/versions/latest/calc.exe](https://dl.cloudsmith.io/public/onismond/calc/raw/versions/latest/calc.exe)
+[hhttps://dl.cloudsmith.io/uTC0JHPikZmMO75J/onismond/calc/raw/versions/latest/calc.exe](https://dl.cloudsmith.io/uTC0JHPikZmMO75J/onismond/calc/raw/versions/latest/calc.exe)
 
 
 For a specific version (e.g., `0.1.0`):
 
 
-[https://dl.cloudsmith.io/public/onismond/calc/raw/versions/0.1.0/calc.exe](https://dl.cloudsmith.io/public/onismond/calc/raw/versions/0.1.0/calc.exe)
+[https://dl.cloudsmith.io/uTC0JHPikZmMO75J/onismond/calc/raw/versions/0.1.0/calc.exe](https://dl.cloudsmith.io/uTC0JHPikZmMO75J/onismond/calc/raw/versions/0.1.0/calc.exe)
 
 
 Then, run it directly from the terminal:
@@ -72,13 +72,13 @@ Then, run it directly from the terminal:
 Download the latest macOS binary from Cloudsmith:
 
 
-[https://dl.cloudsmith.io/public/onismond/calc/raw/versions/latest/calc](https://dl.cloudsmith.io/public/onismond/calc/raw/versions/latest/calc)
+[https://dl.cloudsmith.io/uTC0JHPikZmMO75J/onismond/calc/raw/versions/latest/calc](https://dl.cloudsmith.io/uTC0JHPikZmMO75J/onismond/calc/raw/versions/latest/calc)
 
 
 For a specific version (e.g., `0.1.0`):
 
 
-[https://dl.cloudsmith.io/public/onismond/calc/raw/versions/0.1.0/calc](https://dl.cloudsmith.io/public/onismond/calc/raw/versions/0.1.0/calc)
+[https://dl.cloudsmith.io/uTC0JHPikZmMO75J/onismond/calc/raw/versions/0.1.0/calc](https://dl.cloudsmith.io/uTC0JHPikZmMO75J/onismond/calc/raw/versions/0.1.0/calc)
 
 
 Make it executable and move it to your PATH:
